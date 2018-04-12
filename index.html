@@ -7,82 +7,123 @@
     <title>Train Scheduler</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- jQuery -->
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.js"integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-        <!-- Font Awesome -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+   <script
+    src="https://code.jquery.com/jquery-3.3.1.js"integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script> 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Homenaje" rel="stylesheet">
+    <!-- Moment JS -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     
     
 </head>
-<body>
+<body>   
     <div class="container">
-        <div class="jumbotron"><h1>Train Times</h1></div>
+        <!-- Nav Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <a class="navbar-brand" href="https://www.bart.gov/" target="_blank"><img src="assets/imgs/logo.png" alt="bartlogo" width="50"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link" data-toggle="modal" data-target="#ModalCenter">Bart Map</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://m.bart.gov/schedules/quickplanner" target="_blank">Quick Planner</a>
+                </li>
+            </ul>
+
+            </div>
+        </nav>
+            
+        <!-- Modal -->
+        <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalCenterTitle">Bart Map</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="assets/imgs/map.png"alt="bart map" width="490">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="jumbotron"><div id="clock"></div></div>
+
+        <!-- Train Schedule -->
         <div class="row">
             <div class="col-lg-12">
-                <div class="panel-heading bg-info">
-                    <h5 class="panel-title p-1 text-white">Current Train Schedule</h5>
-                </div>
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><h3><strong>Current Train Schedule</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
                                 <th>Train Name</th>
-                                <th>Desination</th>
-                                <th>Frequency</th>
+                                <th>First Train Time</th>
+                                <th>Destination</th>
+                                <th>Frequency (min)</th>
                                 <th>Next Arrival</th>
                                 <th>Minutes Away</th>
-                            </tr>
-                        </thead>
-                        <tbody id="trainContainer">
-                            <td>Test Item</td>
-                            <td>Test Item</td>
-                            <td>Test Item</td>
-                            <td>Test Item</td>
-                            <td>Test Item</td>
-                        </tbody>
-                    </table>
+                                </tr>
+                            </thead>
+                                <tbody id="trainContainer"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel-heading bg-info">
-                    <h5 class="panel-title p-1 text-white">Add Train</h5>
-                </div>
-                <div class="panel-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="">Train Name :</label>
-                            <input type="text" class="form-control" id="trainName">
-                        </div>
-                        <div class="form-group">
-                            <label>Destination :</label>
-                            <input type="text" class="form-control" id="destination">
-                        </div>
-                        <div class="form-group">
-                            <label>First Train Time (HH:MM) : </label>
-                            <input type="text" class="form-control" id="firstTrainTime">
-                        </div>
-                        <div class="form-group">
-                            <label>Frequency (Minutes) :</label>
-                            <input type="text" class="form-control" id="frequency">
-                        </div>
-                        <button type="submit" class="btn btn-info" id="addTrainBtn">Submit</button>
-                    </form>
-                </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><h3><strong>Add Train</strong></h3>
             </div>
-        </div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <label for="">Train Name</label>
+                        <input type="text" class="form-control" id="trainName">
+                    </div>
+                    <div class="form-group">
+                        <label for="Destination">Destination</label>
+                        <input type="text" class="form-control" id="destination">
+                    </div>
+                    <div class="form-group">
+                        <label for="First-Train-Time">First Train Time (HH:MM)</label>
+                        <input type="text" class="form-control" id="firstTrainTime">
+                    </div>
+                    <div class="form-group">
+                        <label for="Frequency">Frequency (min)</label>
+                        <input type="text" class="form-control" id="frequency">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-3" id="addTrainBtn">Submit</button>
+                </form>
+            </div>
     </div>
 
-    <script src="assets/js/app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>
